@@ -2,6 +2,32 @@
 #include <string>
 using namespace std;
 
+int binarySearch(int list[], int tam, int element) {
+    int esquerda = 0;
+    int direita = tam - 1;
+
+    while (esquerda <= direita) {
+        int meio = (esquerda + direita) / 2;
+
+        if (list[meio] == element)
+        {
+            cout << element;
+            return element;
+        }
+
+        if (list[meio] < element)
+        {
+            esquerda = 1 + meio;
+        }
+
+        else {
+            direita = meio;
+        }
+    }
+
+    return -1;
+}
+
 int bubleSort(int list[], int tam) {
     for (int i = 0; i < tam - 1; i++)
     {
@@ -46,7 +72,9 @@ int main()
     cout << "type the number for search in list: ";
     cin >> elementSearch;
 
-    buscaLinear(list, tamList, elementSearch);
+    binarySearch(list, tamList, elementSearch);
     return 0;
 }
+
+
 
