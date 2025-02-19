@@ -2,6 +2,66 @@
 #include <string>
 using namespace std;
 
+struct no {
+    int item;
+    no *left;
+    no *right;
+};
+
+class Tree {
+private: no *root;
+public: Tree() { root = NULL; }
+
+public: void insertElement(int v) {
+    no* new_item = new no();
+    new_item -> item = v;
+    new_item -> right = NULL;
+    new_item -> left = NULL;
+
+    if (root == NULL)
+    {
+        root = new_item;
+    }
+
+    else {
+        no *now = root;
+        no *before;
+        while (true) {
+            before = now;
+            if (v <= now->item)
+            {
+                now = now->left;
+                if (now == NULL)
+                {
+                    before->left = new_item;
+                    return;
+                }
+            }
+            else {
+                now = now->right;
+                if (now == NULL)
+                {
+                    before->right = new_item;
+                    return;
+                }
+            }
+        }
+    }
+}
+private: void inOrder(no* now) {
+    if (now != NULL)
+    {
+        inOrder(now->left);
+        cout << now->item << " ";
+        inOrder(now->right);
+    }
+}
+public: void caminhar() {
+    cout << "Ordenda: ";
+    inOrder(root);
+}
+};
+
 int binarySearch(int list[], int tam, int element) {
     int esquerda = 0;
     int direita = tam - 1;
@@ -20,7 +80,8 @@ int binarySearch(int list[], int tam, int element) {
             esquerda = 1 + meio;
         }
 
-        else {
+        else 
+        {
             direita = meio;
         }
     }
@@ -65,16 +126,20 @@ int buscaLinear(int list[], int tam, int element) {
 
 int main()
 {
-    int list[] = { 10, 20, 30, 40, 50 };
-    int tamList = sizeof(list) / sizeof(list[0]);
-    int elementSearch;
+    Tree tree;
 
-    cout << "type the number for search in list: ";
-    cin >> elementSearch;
+    tree.insertElement(1);
+    tree.insertElement(2);
+    tree.insertElement(3);
+    tree.insertElement(4);
+    tree.insertElement(5);
+    tree.insertElement(6);
+    tree.insertElement(7);
+    tree.insertElement(8);
+    tree.insertElement(9);
+    tree.insertElement(10);
 
-    binarySearch(list, tamList, elementSearch);
+    tree.caminhar();
+
     return 0;
 }
-
-
-
