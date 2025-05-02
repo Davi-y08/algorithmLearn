@@ -3,23 +3,38 @@
 #include <stdlib.h>
 using namespace std;
 
-
-
-
 struct no
 {
-    //object for the value in node
     int item;
-
-    //pointer for children nodes left
     no* left;
-
-    //poiter for children nodes right
     no* right;
 };
 
-void insertRight(no* no, int valor) {
+void funcFix() {
 
+}
+
+void insertRight(no* No, int valor) {
+    if (No->right == NULL)
+    {
+        no* newNode = (no*)malloc(sizeof(No));
+        newNode->item = valor;
+        newNode->left = NULL;
+        newNode->right = NULL;
+        No->right = newNode;
+    }
+
+    else
+    {
+        if (valor < No->right->item)
+        {
+            insertRight(No->right, valor);
+        }
+        else
+        {
+            insertLeft(No->right, valor);//algo está bugado
+        }
+    }
 }
 
 void insertLeft(no* No, int value) {
@@ -32,7 +47,14 @@ void insertLeft(no* No, int value) {
         No->left = newNode;
     }
     else {
-
+        if (value < No->left->item)
+        {
+            insertLeft(No->left, value);
+        }
+        else
+        {
+            insertRight(No->left, value);
+        }
     }
 }
 
